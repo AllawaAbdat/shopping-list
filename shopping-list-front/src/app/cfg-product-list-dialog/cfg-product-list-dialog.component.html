@@ -1,0 +1,9 @@
+<div class="form-group">
+    <label for="titleInput">Titre de votre liste</label>
+    <input type="text" class="form-control" id="titleInput" aria-describedby="titleHelp" value="{{dataReceived.listTitle}}" placeholder="Saisissez un nouveau titre">
+    <small id="titleHelp" class="form-text text-muted">Saisissez un nouveau titre si vous le souhaitez</small>
+</div>
+<div style="display: flex; float: right;">
+    <button (click)="closeDialog();" class="btn btn-danger">Annuler</button>
+    <button (click)="updateList();"  class="btn btn-success">Modifier</button>
+</div>

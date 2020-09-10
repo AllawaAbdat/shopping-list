@@ -1,0 +1,22 @@
+.btn-active{
+    background-color: #f57f17;
+    color: white;
+    border-radius: 10px;
+    width: fit-content;
+}
+
+.navbar {
+    padding: 10px 0px 10px 0px;
+    transition: all ease 0.4s;
+    background-color: #212121; 
+    font-size: 13px;
+}
+
+.animate{
+    padding: 4px 0px 4px 0px;
+    transition: all ease 0.4s;
+}
+
+li {
+    margin-left: 8px;
+}

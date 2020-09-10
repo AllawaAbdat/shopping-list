@@ -1,0 +1,52 @@
+.cfg-container__step {
+    display: flex; 
+    flex-direction: column; 
+    margin-top: 35px; 
+    margin-left: 40px; 
+    margin-right: 40px;
+}
+
+.cfg-container__step--form-field-margin {
+    margin-left: 15px; 
+    margin-right: 15px; 
+    margin-top: 25px;
+}
+
+.cfg-container__step--catalogue-margin {
+    margin-left: 15px; 
+    margin-right: 15px;
+}
+
+.cfg-container__step-card-container-style {
+    margin-right: 15px; 
+    margin-left: 15px; 
+    border-radius: 2rem;
+}
+
+.column {
+    float: left;
+    width: 25%;
+}
+  
+.row,
+.row > .column {
+    padding: 8px;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+  
+@media screen and (max-width: 900px) {
+.column {
+    width: 50%;
+}
+}
+
+@media screen and (max-width: 600px) {
+.column {
+    width: 100%;
+}
+}

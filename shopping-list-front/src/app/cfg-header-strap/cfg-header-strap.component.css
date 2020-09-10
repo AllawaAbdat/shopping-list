@@ -1,0 +1,21 @@
+.cfg-header {
+    text-align: center;
+    color: white;
+    font-size: 16px;
+    margin: 0 auto;
+    margin-right: 75px;
+    margin-left: 75px;
+}
+
+.cfg-header__img {
+    display: inline-block; 
+    align: center; 
+    vertical-align: center;
+}
+
+.cfg-header__title-header {
+    margin-left: 25px; 
+    font-size: 24px; 
+    display: inline-block; 
+    vertical-align: center;
+}

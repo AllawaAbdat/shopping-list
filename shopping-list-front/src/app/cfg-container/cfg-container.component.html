@@ -1,0 +1,7 @@
+<!-- Principal Container -->
+<app-cfg-navbar *ngIf="booleanIsLoggedIn"></app-cfg-navbar>
+<div fxLayout="column" class="main-root" fxFlexFill>
+    <div fxFlex>
+        <router-outlet></router-outlet>
+    </div>
+</div>

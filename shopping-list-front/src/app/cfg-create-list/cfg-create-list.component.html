@@ -1,0 +1,97 @@
+<!-- Header -->
+<app-cfg-header-strap [titleHeader]="title" [imgPath]="imgPath" data-aos="fade-up" data-aos-anchor-placement="top-bottom"></app-cfg-header-strap>
+
+<!-- Create List -->
+<div class="cfg-container row container-fluid my-5 py-5 px-4 px-lg-0" style="text-align: center">
+    <div style="padding: 10px" class="col-md-7">
+
+            <!-- 1st Step => Ajouter un titre à la nouvelle liste -->
+            <div class="cfg-container__step">
+                1. Ajouter un titre à votre nouvelle liste de courses
+                <div style="margin-top: 35px;" class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroup-sizing-default">Titre</span>
+                    </div>
+                    <input id="titleInput" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                </div>
+            </div>
+
+            <!-- 2nd Step => On ajoute un ou plusieurs produits à notre nouvelle liste de courses -->
+            <div class="cfg-container__step">
+                2. Séléctionnez un ou plusieurs produits parmis notre catalogue
+                <mat-form-field class="cfg-container__step--form-field-margin" class="example-full-width">
+                <mat-label>Catégorie</mat-label>
+                <mat-select (selectionChange)="changeCategory($event.value)">
+                    <mat-option>Aucune</mat-option>
+                    <mat-option *ngFor="let cat of categories" [value]="cat">{{cat.productCategory}}</mat-option>
+                </mat-select>
+                </mat-form-field>
+
+                <!-- Catalogue produits -->
+                <div class="cfg-container container-fluid my-5 py-5 px-4 px-lg-0" style="text-align: center">
+                    <div class="cfg-container__step--catalogue-margin">
+                        <div class="row">
+                          <div class="column" *ngFor="let res of productsCatalogue" data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-duration="1200">
+                            <div class="cfg-container__step-card-container-style h-100 content z-depth-3">
+                              <div *ngIf="res.productCategoryId === categoryId" class="card h-100 mb-3">
+                                <div>
+                                  <img style="margin-top: 5px;" class="cfg-img" src="{{res.productImg}}">
+                                  <div style="text-align: center; margin-top: 5px;">
+                                    <p class="font-weight-bold card-title">{{res.productName}}</p>
+                                    <p>{{res.productDescription}}</p>
+                                    <p><strong>{{res.productPrice}} euros</strong></p>
+                                  </div>
+                                  <div>
+                                    <button id="button_{{res._id}}" type="button" [ngClass]="{
+                                        'btn-success': !productIsInList(res),
+                                        'btn-danger': productIsInList(res)
+                                      }" class="btn" style="margin-right: 15px; float: center;" (click)="addOrRemoveProduct(res);">Ajouter</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <!-- 3th Step => Affichage des produits séléctionnés-->
+    <div class="col-md-5">
+        <div style="display: flex; flex-direction: column;">
+            3. Produits séléctionnés
+            <div class="container mb-4">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col"> </th>
+                                        <th scope="col">Nom</th>
+                                        <th scope="col" class="text-center">Quantité</th>
+                                        <th scope="col" class="text-right">Prix</th>
+                                        <th> </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let product of productsChoosen">
+                                        <td><img src="{{product.productImg}}" width="50" height="50"/> </td>
+                                        <td>{{product.productName}}</td>
+                                        <td><input class="form-control" type="text" value="1" id="{{product._id}}"/></td>
+                                        <td class="text-right">{{product.productPrice}}</td>
+                                        <td class="text-right"><button class="btn btn-sm btn-danger" (click)="addOrRemoveProduct(product);"><i class="fa fa-trash"></i> </button> </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 4th Step => Validation et création de la nouvelle liste -->
+        <div style="display: flex; flex-direction: column;">
+            <button type="button" class="btn btn-success" (click)="validateList();">Valider</button>
+        </div>
+    </div>
+</div>

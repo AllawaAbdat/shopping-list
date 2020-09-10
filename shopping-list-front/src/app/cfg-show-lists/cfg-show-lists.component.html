@@ -1,0 +1,26 @@
+<!-- Create List Section -->
+<app-cfg-header-strap [titleHeader]="title" [imgPath]="imgPath" data-aos="fade-up" data-aos-anchor-placement="top-bottom"></app-cfg-header-strap>
+
+<!-- User Lists -->
+<div class="cfg-container container-fluid my-5 py-5 px-4 px-lg-0" style="text-align: center;">
+  <div class="col-md-12">
+    <table class="table table-striped">
+      <thead>
+      <tr style="text-align: center;">
+        <th>Titre</th>
+        <th>Date de Création</th>
+        <th>Supprimer</th>
+        <th>Editer</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let list of userShoppingLists">
+        <td>{{list.listTitle}}</td>
+        <td>{{list.creationDate}}</td>
+        <td><button (click)="deleteList(list._id);" class="btn btn-danger">Supprimer</button></td>
+        <td><button (click)="updateList(list._id)" class="btn btn-info">Editer</button></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
