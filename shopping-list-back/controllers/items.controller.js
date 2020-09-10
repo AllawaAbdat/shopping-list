@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Items = mongoose.model('Items');
 
-// Contrôlleur permettant de récupérer tout les produits du 'catalogue'
+// Contrôleur permettant de récupérer tout les produits du 'catalogue'
 module.exports.itemsList = (req, res, next) => {
     Items.find({}, (err, items) => {
         if (!err)

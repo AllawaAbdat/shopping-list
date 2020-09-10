@@ -4,7 +4,7 @@ const _ = require('lodash');
 
 const User = mongoose.model('User');
 
-// Contrôlleur permettant d'ajouter un nouvel utilisateur à la BDD
+// Contrôleur permettant d'ajouter un nouvel utilisateur à la BDD
 module.exports.register = (req, res, next) => {
     var user = new User();
     user.fullName = req.body.fullName;
@@ -23,7 +23,7 @@ module.exports.register = (req, res, next) => {
     });
 }
 
-// Contrôlleur permettant à un utilisateur de s'authentifier
+// Contrôleur permettant à un utilisateur de s'authentifier
 module.exports.authenticate = (req, res, next) => {
     // call for passport authentication
     passport.authenticate('local', (err, user, info) => {       
@@ -36,7 +36,7 @@ module.exports.authenticate = (req, res, next) => {
     })(req, res);
 }
 
-// Contrôlleur permettant de récupérer les informations de l'utilisateur
+// Contrôleur permettant de récupérer les informations de l'utilisateur
 module.exports.userProfile = (req, res, next) =>{
     User.findOne({ _id: req._id },
         (err, user) => {

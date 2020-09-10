@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const ProductList = mongoose.model('ProductList');
 
-// Contrôlleur permettant d'ajouter une nouvelle liste de courses
+// Contrôleur permettant d'ajouter une nouvelle liste de courses
 module.exports.newProductList = (req, res, next) => {
     var productList = new ProductList();
     productList.productName = req.body.productName;
@@ -24,7 +24,7 @@ module.exports.newProductList = (req, res, next) => {
     });
 }
 
-// Contrôlleur permettant de récupérer toutes les listes de courses de l'utilisateur
+// Contrôleur permettant de récupérer toutes les listes de courses de l'utilisateur
 module.exports.getUserProductLists = (req, res, next) => {
     ProductList.find({userId: req._id}, (err, items) => {
         if (!err)
@@ -35,7 +35,7 @@ module.exports.getUserProductLists = (req, res, next) => {
     });
 }
 
-// Contrôlleur permettant de supprimer une liste de courses
+// Contrôleur permettant de supprimer une liste de courses
 module.exports.deleteUserProductList = (req, res, next) => {
     ProductList.findOneAndRemove({_id: req.params._id}, (err, productList) => {
         if (!err)
@@ -46,7 +46,7 @@ module.exports.deleteUserProductList = (req, res, next) => {
     });
 }
 
-// Contrôlleur permettant de modifier une liste de courses
+// Contrôleur permettant de modifier une liste de courses
 module.exports.updateUserProductList = (req, res, next) => {
     ProductList.findById({_id: req.body._id}, (err, productList) => {
         if (!err) {
