@@ -1,4 +1,4 @@
-# Chefing Shopping List Project
+# Chefing Shopping List Project (En cours de dév)
 
 ## Introduction [FR]
 
