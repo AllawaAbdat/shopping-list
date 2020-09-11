@@ -72,27 +72,32 @@ export class CfgAddProductComponent implements OnInit {
 
   // Fonction permettant d'ajouter un nouveau produit au catalogue
   createNewProduct() {
-    const productNameInput = document.getElementById('productNameInput') as HTMLInputElement;
-    const productDescriptionTextArea = document.getElementById('productDescriptionTextArea') as HTMLTextAreaElement;
-    const productPriceInput = document.getElementById('productPriceInput') as HTMLInputElement;
-    const productCategoryText = this.categories.find(category => category.productCategoryId === this.categoryId).productCategory;
-
-    if (productNameInput.value.length === 0 || productDescriptionTextArea.value.length === 0 || productPriceInput.value.length === 0 || productCategoryText.length === 0) {
-      this.toastr.info('Veuillez remplir tout les champs du formulaire', 'Info');
+    console.log('This.category :::', this.categoryId);
+    if (this.categoryId === '' || this.categoryId === '0' || this.categoryId === undefined) {
+      this.toastr.info('Veuillez séléctionner une catégorie', 'Info');
     } else {
-      const newProduct = {
-        productName: productNameInput.value,
-        productDescription: productDescriptionTextArea.value,
-        productPrice: productPriceInput.value,
-        productCategory: productCategoryText,
-        productCategoryId: this.categoryId,
-        productImg: ''
-      };
+      const productNameInput = document.getElementById('productNameInput') as HTMLInputElement;
+      const productDescriptionTextArea = document.getElementById('productDescriptionTextArea') as HTMLTextAreaElement;
+      const productPriceInput = document.getElementById('productPriceInput') as HTMLInputElement;
+      const productCategoryText = this.categories.find(category => category.productCategoryId === this.categoryId).productCategory;
 
-      this.productsService.createProduct(newProduct).subscribe((data) => {
-        this.toastr.info('Votre produit à bien été ajouté à notre catalogue !', 'Success');
-        this.resetAll();
-      });
+      if (productNameInput.value.length === 0 || productDescriptionTextArea.value.length === 0 || productPriceInput.value.length === 0) {
+        this.toastr.info('Veuillez remplir tout les champs du formulaire', 'Info');
+      } else {
+        const newProduct = {
+          productName: productNameInput.value,
+          productDescription: productDescriptionTextArea.value,
+          productPrice: productPriceInput.value,
+          productCategory: productCategoryText,
+          productCategoryId: this.categoryId,
+          productImg: ''
+        };
+
+        this.productsService.createProduct(newProduct).subscribe((data) => {
+          this.toastr.info('Votre produit à bien été ajouté à notre catalogue !', 'Success');
+          this.resetAll();
+        });
+      }
     }
 
   }

@@ -20,7 +20,7 @@
                 <tr *ngFor="let product of products">
                     <td><img src="{{product.productImg}}" width="50" height="50"/> </td>
                     <td>{{product.productName}}</td>
-                    <td><input class="form-control" type="text" value="1" id="{{product.productQte}}" disabled/></td>
+                    <td><input class="form-control" type="text" value="{{product.productQte}}" id="{{product.productId}}" disabled/></td>
                 </tr>
             </tbody>
         </table>

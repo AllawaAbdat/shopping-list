@@ -43,7 +43,7 @@ export class CfgCreateListComponent implements OnInit {
     private toastr: ToastrService
   ) {
     this.config = {
-      itemsPerPage: 8,
+      itemsPerPage: 4,
       currentPage: 1,
       totalItems: this.productsByCategory.count
     };
@@ -113,6 +113,7 @@ export class CfgCreateListComponent implements OnInit {
   changeCategory(event) {
     this.categoryId = event.productCategoryId;
     this.productsByCategory = [];
+    this.config.currentPage = 1;
 
     this.productsCatalogue.forEach(element => {
       if (element.productCategoryId === event.productCategoryId) {

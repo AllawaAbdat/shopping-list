@@ -9,7 +9,6 @@
 .cfg-container__step--form-field-margin {
     margin-left: 15px; 
     margin-right: 15px; 
-    margin-top: 25px;
 }
 
 .cfg-container__step--catalogue-margin {
@@ -25,7 +24,7 @@
 
 .column {
     float: left;
-    width: 25%;
+    width: 50%;
 }
   
 .row,
@@ -39,9 +38,9 @@
     clear: both;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1000px) {
 .column {
-    width: 50%;
+    width: 100%;
 }
 }
 

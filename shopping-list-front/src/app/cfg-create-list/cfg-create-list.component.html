@@ -8,7 +8,7 @@
             <!-- On ajoute un ou plusieurs produits à notre nouvelle liste de courses -->
             <div class="cfg-container__step">
                 <b>Séléctionnez un ou plusieurs produits au sein de notre catalogue</b>
-                <mat-form-field class="cfg-container__step--form-field-margin" class="example-full-width">
+                <mat-form-field class="cfg-container__step--form-field-margin example-full-width" style="margin-top: 15px;">
                 <mat-label>Catégorie</mat-label>
                 <mat-select [(value)]="matSelectorValue" (selectionChange)="changeCategory($event.value)">
                     <mat-option [value]="0">Aucune</mat-option>
@@ -67,7 +67,7 @@
         </div>
         <div style="display: flex; flex-direction: column; margin-top: 15px">
             <b>Produits séléctionnés</b>
-            <div class="container">
+            <div class="container" style="margin-top: 15px;">
                 <div class="row">
                     <div class="col-12">
                         <div class="table-responsive">
