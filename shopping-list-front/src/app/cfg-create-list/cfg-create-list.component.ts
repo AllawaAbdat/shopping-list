@@ -4,6 +4,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { CfgUserService } from '../cfg-services/cfg-user.service';
 import * as moment from 'moment';
+import { MatSelect, MatSelectModule } from '@angular/material/select';
 
 interface Categories {
   productCategory: string;
@@ -23,8 +24,15 @@ export class CfgCreateListComponent implements OnInit {
   userId = '';
   productsCatalogue: any = [];
   productsChoosen: any = [];
+  productsByCategory: any = [];
   categoryId = '';
   titleInput = document.getElementById('titleInput') as HTMLButtonElement;
+  config: any;
+  labels = {
+    previousLabel: 'Précédent',
+    nextLabel: 'Suivant'
+  }
+  matSelectorValue = '0';
 
 
   // Constructeur
@@ -33,7 +41,13 @@ export class CfgCreateListComponent implements OnInit {
     private productsService: CfgProductsService,
     private productListService: CfgProductListService,
     private toastr: ToastrService
-  ) { }
+  ) {
+    this.config = {
+      itemsPerPage: 8,
+      currentPage: 1,
+      totalItems: this.productsByCategory.count
+    };
+  }
 
   // Catégories pour le "select"
   categories: Categories[] = [
@@ -98,6 +112,13 @@ export class CfgCreateListComponent implements OnInit {
   // Fonction permettant de définir 'categoryId' pour afficher les bons produits selon la catégorie (voir => html)
   changeCategory(event) {
     this.categoryId = event.productCategoryId;
+    this.productsByCategory = [];
+
+    this.productsCatalogue.forEach(element => {
+      if (element.productCategoryId === event.productCategoryId) {
+        this.productsByCategory.push(element);
+      }
+    });
   }
 
 
@@ -139,13 +160,13 @@ export class CfgCreateListComponent implements OnInit {
 
   // Fonction permettant d'ajouter la nouvelle liste de course crée par l'utilisateur
   addNewList(title) {
-    const DATE_TIME_FORMAT = 'DD-MM-YYYY';
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     let totalAmount = this.calculateTotalAmount();
 
     const selectedProducts = {
       userId: this.userId,
       listTitle: title,
-      creationDate: moment(new Date(), DATE_TIME_FORMAT),
+      creationDate: new Date().toLocaleDateString(undefined, options),
       products: this.newProductArray(),
       totalAmount: totalAmount
     };
@@ -195,9 +216,16 @@ export class CfgCreateListComponent implements OnInit {
   // Fonction qui permet de clean l'écran après avoir ajouter la nouvelle liste de courses
   resetAll() {
     let titleInput = document.getElementById('titleInput') as HTMLButtonElement;
+
     titleInput.value = '';
     titleInput.innerText = '';
+    this.matSelectorValue = '0';
     this.productsChoosen = [];
+    this.productsByCategory = [];
+  }
+
+  pageChanged(event){
+    this.config.currentPage = event;
   }
 
 }

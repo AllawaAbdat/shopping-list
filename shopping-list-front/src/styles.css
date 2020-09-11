@@ -23,12 +23,12 @@ body {
 }
 
 .cfg-container {
-  margin-left: 15px; 
-  margin-right: 15px; 
-  margin: 0 auto; 
   width: 100%;
-  height: 100%; 
+  height: 100%;
   background-color: #fafafa;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin: 0 auto;
 }
 
 .cfg-img {
@@ -41,18 +41,22 @@ body {
 }
 
 .main-root {
+  display: flex;
+  flex-direction: column;
   margin-top: 90px;
   margin-left: 25px;
   margin-right: 25px;
   height: 75%;
-  display: flex;
-  flex-direction: column;
 }
 
 @font-face {
   font-family: 'OpenSans';
   src: url(./assets/fonts/OpenSans/OpenSans-Regular.ttf) format("truetype");
   font-weight:300;
+}
+
+.ngx-pagination {
+  margin-top: 20px;
 }
 
 /* For CFG-USER */

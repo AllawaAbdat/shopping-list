@@ -1,9 +1,33 @@
 <div class="form-group">
-    <label for="titleInput">Titre de votre liste</label>
-    <input type="text" class="form-control" id="titleInput" aria-describedby="titleHelp" value="{{dataReceived.listTitle}}" placeholder="Saisissez un nouveau titre">
-    <small id="titleHelp" class="form-text text-muted">Saisissez un nouveau titre si vous le souhaitez</small>
+    <div style="display: flex; flex-direction: column;">
+        <label for="titleInput"><b>Titre :</b></label>
+        <input type="text" class="form-control" id="titleInput" aria-describedby="titleHelp" value="{{dataReceived.listTitle}}" placeholder="Saisissez un nouveau titre">
+        <small id="titleHelp" class="form-text text-muted">Saisissez un nouveau titre si vous le souhaitez</small>
+    </div>
+    
+
+    <div style="margin-top: 15px" class="table-responsive">
+        <label for="productInput"><b>Produits :</b></label>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th style="font-size: 16px;" scope="col">Nom</th>
+                    <th style="font-size: 16px;"scope="col" class="text-center">Quantité</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of products">
+                    <td><img src="{{product.productImg}}" width="50" height="50"/> </td>
+                    <td>{{product.productName}}</td>
+                    <td><input class="form-control" type="text" value="1" id="{{product.productQte}}" disabled/></td>
+                </tr>
+            </tbody>
+        </table>
+        <small id="productHelp" class="form-text text-muted">Prochainement, vous pourrez modifier, supprimer ou ajouter des produits à votre liste de courses déjà existante</small>
+    </div>
 </div>
 <div style="display: flex; float: right;">
-    <button (click)="closeDialog();" class="btn btn-danger">Annuler</button>
-    <button (click)="updateList();"  class="btn btn-success">Modifier</button>
+    <button (click)="closeDialog();" class="btn btn-danger" style="margin-right: 10px">Annuler</button>
+    <button (click)="updateList();" class="btn btn-success">Modifier</button>
 </div>

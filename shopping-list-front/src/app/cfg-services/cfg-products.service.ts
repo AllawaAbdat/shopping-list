@@ -15,4 +15,8 @@ export class CfgProductsService {
         return this.http.get(environment.apiBaseUrl + '/itemsList');
     }
 
+    createProduct(payload) {
+        return this.http.post(environment.apiBaseUrl + '/newItem', payload);
+    }
+
 }

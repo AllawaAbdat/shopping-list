@@ -1,3 +1,4 @@
+import { BrowserModule } from '@angular/platform-browser';
 import { CfgAddProductComponent } from './cfg-add-product/cfg-add-product.component';
 import { CfgShowListsComponent } from './cfg-show-lists/cfg-show-lists.component';
 import { CfgCreateListComponent } from './cfg-create-list/cfg-create-list.component';
@@ -7,13 +8,12 @@ import { CfgContainerComponent } from './cfg-container/cfg-container.component';
 import { CfgUserComponent } from './cfg-user/cfg-user.component';
 import { CfgSignUpComponent } from './cfg-user/cfg-sign-up/cfg-sign-up.component';
 import { CfgSignInComponent } from './cfg-user/cfg-sign-in/cfg-sign-in.component';
-import { Routes } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './cfg-auth/auth.guard';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-
-export const appRoutes: Routes = [
+const appRoutes: Routes = [
     {
         path: 'signup', component: CfgUserComponent,
         children: [
@@ -43,8 +43,11 @@ export const appRoutes: Routes = [
 ];
 
 @NgModule({
-    imports: [CommonModule]
+    imports: [
+      CommonModule,
+      RouterModule.forRoot(appRoutes)
+    ],
+    exports: [RouterModule]
 })
 
-export class MainModule {
-}
+export class AppRoutingModule { }
