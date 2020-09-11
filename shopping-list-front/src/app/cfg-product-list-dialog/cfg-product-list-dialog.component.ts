@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject, Optional } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CfgProductListService } from '../cfg-services/cfg-product-list.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -20,6 +21,7 @@ export class CfgProductListDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<CfgProductListDialogComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
     private productListsService: CfgProductListService,
+    private toastr: ToastrService
   ) {
     this.dataReceived = data;
     console.log(this.dataReceived);
@@ -32,15 +34,22 @@ export class CfgProductListDialogComponent implements OnInit {
   // Fonction permettant de mettre à jour les informations de la liste
   updateList() {
     const inputElement = document.getElementById('titleInput') as HTMLInputElement;
-    this.dataReceived['listTitle'] = inputElement.value;
 
-    this.productListsService.updateUserProductList(this.dataReceived).subscribe(
-      res => {
-        this.dialogRef.close({ event: 'close', data: this.dataSended});
-      },
-      err => {
-      }
-    );
+    if (inputElement.value.length === 0) {
+      this.toastr.info('Veuillez saisir un titre', 'Info');
+    } else if (inputElement.value.length > 25) {
+      this.toastr.info('Veuillez saisir un titre ayant moins de 25 caractères', 'Info');
+    } else {
+      this.dataReceived['listTitle'] = inputElement.value;
+
+      this.productListsService.updateUserProductList(this.dataReceived).subscribe(
+        res => {
+          this.dialogRef.close({ event: 'close', data: this.dataSended});
+        },
+        err => {
+        }
+      );
+    }
   }
 
   closeDialog() {

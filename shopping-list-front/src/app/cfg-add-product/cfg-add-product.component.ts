@@ -72,13 +72,17 @@ export class CfgAddProductComponent implements OnInit {
 
   // Fonction permettant d'ajouter un nouveau produit au catalogue
   createNewProduct() {
-    console.log('This.category :::', this.categoryId);
+    const productNameInput = document.getElementById('productNameInput') as HTMLInputElement;
+    const productDescriptionTextArea = document.getElementById('productDescriptionTextArea') as HTMLTextAreaElement;
+    const productPriceInput = document.getElementById('productPriceInput') as HTMLInputElement;
+
     if (this.categoryId === '' || this.categoryId === '0' || this.categoryId === undefined) {
       this.toastr.info('Veuillez séléctionner une catégorie', 'Info');
+    } else if (productNameInput.value.length > 25) {
+      this.toastr.info('Veuillez saisir un titre ayant moins de 25 caractères', 'Info');
+    } else if (productDescriptionTextArea.value.length > 50) {
+      this.toastr.info('Veuillez saisir une description ayant moins de 50 caractères', 'Info');
     } else {
-      const productNameInput = document.getElementById('productNameInput') as HTMLInputElement;
-      const productDescriptionTextArea = document.getElementById('productDescriptionTextArea') as HTMLTextAreaElement;
-      const productPriceInput = document.getElementById('productPriceInput') as HTMLInputElement;
       const productCategoryText = this.categories.find(category => category.productCategoryId === this.categoryId).productCategory;
 
       if (productNameInput.value.length === 0 || productDescriptionTextArea.value.length === 0 || productPriceInput.value.length === 0) {

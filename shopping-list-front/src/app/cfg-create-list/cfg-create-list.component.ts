@@ -154,6 +154,8 @@ export class CfgCreateListComponent implements OnInit {
     // On vérifie si l'utilisateur a bien saisi un titre et choisi au minimum un produit
     if (this.productsChoosen.length === 0 || title.value.length === 0) {
       this.toastr.info('Veuillez saisir un titre et choisir au minimum 1 produit', 'Info');
+    } else if (title.value.length > 25) {
+      this.toastr.info('Veuillez saisir un titre ayant moins de 25 caractères', 'Info');
     } else {
       this.addNewList(title.value);
     }
