@@ -5,35 +5,24 @@
 <div class="cfg-container row container-fluid my-5 py-5 px-4 px-lg-0" style="text-align: center">
     <div style="padding: 10px" class="col-md-7">
 
-            <!-- 1st Step => Ajouter un titre à la nouvelle liste -->
+            <!-- On ajoute un ou plusieurs produits à notre nouvelle liste de courses -->
             <div class="cfg-container__step">
-                1. Ajouter un titre à votre nouvelle liste de courses
-                <div style="margin-top: 35px;" class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="inputGroup-sizing-default">Titre</span>
-                    </div>
-                    <input id="titleInput" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-                </div>
-            </div>
-
-            <!-- 2nd Step => On ajoute un ou plusieurs produits à notre nouvelle liste de courses -->
-            <div class="cfg-container__step">
-                2. Séléctionnez un ou plusieurs produits parmis notre catalogue
+                <b>Séléctionnez un ou plusieurs produits au sein de notre catalogue</b>
                 <mat-form-field class="cfg-container__step--form-field-margin" class="example-full-width">
                 <mat-label>Catégorie</mat-label>
-                <mat-select (selectionChange)="changeCategory($event.value)">
-                    <mat-option>Aucune</mat-option>
+                <mat-select [(value)]="matSelectorValue" (selectionChange)="changeCategory($event.value)">
+                    <mat-option [value]="0">Aucune</mat-option>
                     <mat-option *ngFor="let cat of categories" [value]="cat">{{cat.productCategory}}</mat-option>
                 </mat-select>
                 </mat-form-field>
 
                 <!-- Catalogue produits -->
-                <div class="cfg-container container-fluid my-5 py-5 px-4 px-lg-0" style="text-align: center">
+                <div class="cfg-container container-fluid py-5 px-lg-0" style="text-align: center">
                     <div class="cfg-container__step--catalogue-margin">
                         <div class="row">
-                          <div class="column" *ngFor="let res of productsCatalogue" data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-duration="1200">
-                            <div class="cfg-container__step-card-container-style h-100 content z-depth-3">
-                              <div *ngIf="res.productCategoryId === categoryId" class="card h-100 mb-3">
+                          <div class="column" *ngFor="let res of productsByCategory | paginate: config" data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-duration="1200">
+                            <div *ngIf="res.productCategoryId === categoryId" class="cfg-container__step-card-container-style h-100 content z-depth-3">
+                              <div class="card h-100 mb-3">
                                 <div>
                                   <img style="margin-top: 5px;" class="cfg-img" src="{{res.productImg}}">
                                   <div style="text-align: center; margin-top: 5px;">
@@ -45,33 +34,51 @@
                                     <button id="button_{{res._id}}" type="button" [ngClass]="{
                                         'btn-success': !productIsInList(res),
                                         'btn-danger': productIsInList(res)
-                                      }" class="btn" style="margin-right: 15px; float: center;" (click)="addOrRemoveProduct(res);">Ajouter</button>
+                                      }" class="btn" style="float: center;" (click)="addOrRemoveProduct(res);">Ajouter</button>
                                   </div>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
+                        <pagination-controls
+                            style="margin-top: 10px;"
+                            [autoHide]="true"
+                            [responsive]="true"
+                            [previousLabel]="labels.previousLabel"
+                            [nextLabel]="labels.nextLabel"
+                            (pageChange)="pageChanged($event)">
+                        </pagination-controls>
                     </div>
                 </div>
             </div>
     </div>
-    <!-- 3th Step => Affichage des produits séléctionnés-->
+    <!-- Affichage des produits séléctionnés-->
     <div class="col-md-5">
-        <div style="display: flex; flex-direction: column;">
-            3. Produits séléctionnés
-            <div class="container mb-4">
+        <!-- Ajouter un titre à la nouvelle liste -->
+        <div class="cfg-container__step">
+            <b>Insérer un nom pour votre liste</b>
+            <div style="margin-top: 35px;" class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Titre</span>
+                </div>
+                <input id="titleInput" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+            </div>
+        </div>
+        <div style="display: flex; flex-direction: column; margin-top: 15px">
+            <b>Produits séléctionnés</b>
+            <div class="container">
                 <div class="row">
                     <div class="col-12">
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th scope="col"> </th>
-                                        <th scope="col">Nom</th>
-                                        <th scope="col" class="text-center">Quantité</th>
-                                        <th scope="col" class="text-right">Prix</th>
-                                        <th> </th>
+                                        <th></th>
+                                        <th style="font-size: 16px;" scope="col">Nom</th>
+                                        <th style="font-size: 16px;"scope="col" class="text-center">Quantité</th>
+                                        <th style="font-size: 16px;" scope="col" class="text-right">Prix</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -80,18 +87,18 @@
                                         <td>{{product.productName}}</td>
                                         <td><input class="form-control" type="text" value="1" id="{{product._id}}"/></td>
                                         <td class="text-right">{{product.productPrice}}</td>
-                                        <td class="text-right"><button class="btn btn-sm btn-danger" (click)="addOrRemoveProduct(product);"><i class="fa fa-trash"></i> </button> </td>
+                                        <td class="text-center"><button class="btn btn-sm btn-danger" (click)="addOrRemoveProduct(product);"><i class="fa fa-trash"></i> </button> </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
+                <div class="row" style="margin-left: 0px; margin-right: 0px;">
+                    <!-- Validation et création de la nouvelle liste -->
+                    <button style="width: 100%;" type="button" class="btn btn-success" (click)="validateList();">Valider</button>
+                </div>
             </div>
-        </div>
-        <!-- 4th Step => Validation et création de la nouvelle liste -->
-        <div style="display: flex; flex-direction: column;">
-            <button type="button" class="btn btn-success" (click)="validateList();">Valider</button>
         </div>
     </div>
 </div>

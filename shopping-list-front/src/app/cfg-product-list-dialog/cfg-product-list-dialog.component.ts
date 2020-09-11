@@ -27,7 +27,6 @@ export class CfgProductListDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.products = this.dataReceived['products'];
-    console.log('content of products ::::', this.products);
   }
 
   // Fonction permettant de mettre à jour les informations de la liste

@@ -1,13 +1,15 @@
+import { CfgProductsService } from './cfg-services/cfg-products.service';
+import { CfgProductListService } from './cfg-services/cfg-product-list.service';
 import { CfgUserService } from './cfg-services/cfg-user.service';
 import { AuthInterceptor } from './cfg-auth/auth.interceptor';
 import { AuthGuard } from './cfg-auth/auth.guard';
-import { appRoutes } from './routes';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './routes.module';
 import { CfgUserComponent } from './cfg-user/cfg-user.component';
 import { CfgSignUpComponent } from './cfg-user/cfg-sign-up/cfg-sign-up.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -38,6 +40,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatExpansionModule } from '@angular/material/expansion';
 
+import { NgxPaginationModule } from 'ngx-pagination';
+
 import { DatePipe } from '@angular/common';
 
 @NgModule({
@@ -55,10 +59,16 @@ import { DatePipe } from '@angular/common';
     CfgAddProductComponent,
     CfgContainerComponent,
     CfgHeaderStrapComponent,
-    CfgFooterComponent
+    CfgFooterComponent,
+    CfgProductListDialogComponent
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+    MDBBootstrapModule.forRoot(),
+    TooltipModule.forRoot(),
     FormsModule,
     MatDatepickerModule,
     MatNativeDateModule,
@@ -67,20 +77,15 @@ import { DatePipe } from '@angular/common';
     MatInputModule,
     MatSelectModule,
     MatExpansionModule,
-    RouterModule.forRoot(appRoutes),
-    HttpClientModule,
-    BrowserAnimationsModule, // required animations module
-    ToastrModule.forRoot(), // ToastrModule added
-    MDBBootstrapModule.forRoot(),
-    TooltipModule.forRoot()
+    NgxPaginationModule,
+    HttpClientModule
   ],
   exports: [ MatFormFieldModule, MatInputModule ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true
-  }, AuthGuard, CfgUserService, DatePipe],
-  bootstrap: [AppComponent],
-  entryComponents: [CfgProductListDialogComponent]
+  }, AuthGuard, CfgUserService, CfgProductListService, CfgProductsService, DatePipe],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

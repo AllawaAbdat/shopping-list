@@ -1,1 +1,35 @@
-<p>cfg-add-product works!</p>
+<!-- Header -->
+<app-cfg-header-strap [titleHeader]="title" [imgPath]="imgPath" data-aos="fade-up" data-aos-anchor-placement="top-bottom"></app-cfg-header-strap>
+
+<!-- Add New Product -->
+<div class="cfg-container container-fluid my-5 py-5 px-4 px-lg-0" style="text-align: center">
+    <div class="col-md-12" style="display: flex; flex-direction: column; align-items: center;">
+        <form>
+            <div class="form-group">
+                <label><b>Nom du produit :</b></label>
+                <input type="text" class="form-control" id="productNameInput" placeholder="">
+            </div>
+            <div class="form-group">
+                <label><b>Description du produit :</b></label>
+                <textarea type="text" class="form-control" id="productDescriptionTextArea" rows="3" placeholder=""></textarea>
+            </div>
+            <div class="form-group">
+                <label><b>Prix du produit (à l'unité) :</b></label>
+                <input type="number" class="form-control" id="productPriceInput" placeholder="">
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center;" class="form-group">
+                <label><b>Catégorie :</b></label>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Catégorie</mat-label>
+                    <mat-select [(value)]="matSelectorValue" (selectionChange)="changeCategory($event.value)">
+                        <mat-option [value]="0">Aucune</mat-option>
+                        <mat-option *ngFor="let cat of categories" [value]="cat">{{cat.productCategory}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="form-group">
+                <button style="width: 100%;" type="button" class="btn btn-success" (click)="createNewProduct()">Ajouter</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -13,6 +13,7 @@ const jwtHelper = require('../config/jwtHelper');
 router.post('/register', ctrlUser.register);
 router.post('/authenticate', ctrlUser.authenticate);
 router.post('/newProductList', jwtHelper.verifyJwtToken, ctrlProductList.newProductList);
+router.post('/newItem', jwtHelper.verifyJwtToken, ctrlProducts.newItem);
 router.get('/userProfile', jwtHelper.verifyJwtToken, ctrlUser.userProfile);
 router.get('/itemsList', jwtHelper.verifyJwtToken, ctrlProducts.itemsList);
 router.get('/getUserProductLists', jwtHelper.verifyJwtToken, ctrlProductList.getUserProductLists);

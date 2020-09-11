@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { CfgUserService } from '../cfg-services/cfg-user.service';
 import { Router } from '@angular/router';
 
@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   templateUrl: './cfg-container.component.html',
   styleUrls: ['./cfg-container.component.css']
 })
-export class CfgContainerComponent implements OnInit {
+export class CfgContainerComponent implements OnInit, OnChanges {
 
   // Variables
   userDetails;
@@ -18,6 +18,11 @@ export class CfgContainerComponent implements OnInit {
     private userService: CfgUserService,
     private router: Router
   ) { }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('changes', changes);
+    this.booleanIsLoggedIn = this.userService.isLoggedIn();
+  }
 
   ngOnInit() {
     // Booleen permettant d'afficher ou non la navbar

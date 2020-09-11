@@ -11,4 +11,5 @@ mongoose.connect(process.env.MONGODB_URI, (err) => {
 
 require('./user.model');
 require('./items.model');
+require('./newItem.model');
 require('./product-list.model');
