@@ -20,7 +20,6 @@ export class AppComponent implements OnInit, OnChanges {
   ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('ngOnChanges');
   }
 
   ngOnInit(): void {
@@ -28,11 +27,9 @@ export class AppComponent implements OnInit, OnChanges {
     this.booleanIsLoggedIn = this.userService.isLoggedIn();
     this.userService.getUserProfile().subscribe(
       res => {
-        console.log('user', res);
         this.userDetails = res['user'];
       },
       err => {
-        console.log(err);
       }
     );
   }

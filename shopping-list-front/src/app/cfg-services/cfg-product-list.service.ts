@@ -31,7 +31,6 @@ export class CfgProductListService {
     }
 
     deleteUserProductList(_id) {
-        console.log('_id', _id);
         return this.http.delete(environment.apiBaseUrl + '/deleteUserProductList/' + _id);
     }
 

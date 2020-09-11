@@ -18,8 +18,6 @@ export class CfgUserProfileComponent implements OnInit {
         this.userDetails = res['user'];
       },
       err => {
-        console.log(err);
-
       }
     );
   }

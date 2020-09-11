@@ -20,7 +20,6 @@ export class CfgContainerComponent implements OnInit, OnChanges {
   ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('changes', changes);
     this.booleanIsLoggedIn = this.userService.isLoggedIn();
   }
 

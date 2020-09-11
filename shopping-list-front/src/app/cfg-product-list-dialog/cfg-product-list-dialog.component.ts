@@ -24,7 +24,6 @@ export class CfgProductListDialogComponent implements OnInit {
     private toastr: ToastrService
   ) {
     this.dataReceived = data;
-    console.log(this.dataReceived);
   }
 
   ngOnInit(): void {

@@ -11,7 +11,7 @@ export class AuthGuard implements CanActivate {
 
   // Constructeur
   constructor(
-    private userService: CfgUserService, 
+    private userService: CfgUserService,
     private router: Router
   ){}
 
@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
       if (!this.userService.isLoggedIn()) {
-        this.router.navigateByUrl('/login');
+        this.router.navigateByUrl('');
         this.userService.deleteToken();
         return false;
       }
